@@ -1,19 +1,50 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider'
+import Clipboard from 'expo-clipboard'
 
 import BlockIcon from './src/img/blocIcon.png'
 
+let charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*'
+
 export default function App() {
+
+  const [password, setPassword] = useState('')
+  const [size, setSize] = useState(10)
+
+  const handlerGenerator = () => {
+    let pass = ''
+    for (let i = 0, n = charset.length; i < size; i++) {
+      pass += charset.charAt(Math.floor(Math.random() * n))
+    }
+
+    setPassword(pass);
+  }
+
+  const handlerStyles = (password) => {
+    if (password !== '') {
+      return styles.textGeneratorView
+    } else {
+      return styles.textGeneratorOpacity
+    }
+  }
+  const handlerCopyString = () => {
+    Clipboard.setString(password)
+    alert('Senha copiada com sucesso')
+  }
+
   return (
     <View style={styles.container}>
       <Image source={BlockIcon} style={styles.imageIcon} />
+      <Text style={styles.textCaracter} >{size} Caracters</Text>
       <View
         style={styles.areaSlider}
       >
         <Slider
           style={{ height: 50, width: '100%' }}
+          value={size}
+          onValueChange={(valor) => setSize(valor.toFixed(0))}
           minimumValue={5}
           maximumValue={15}
           minimumTrackTintColor={"#FF0000"}
@@ -25,13 +56,16 @@ export default function App() {
       >
         <TouchableOpacity
           style={styles.buttonGenerator}
+          onPress={handlerGenerator}
         >
           <Text style={styles.textButton}>GERAR SENHA</Text>
         </TouchableOpacity>
 
-        <View style={styles.textGeneratorView} >
-          <TouchableOpacity>
-            <Text style={styles.textGenerator}>VALOR GERADO</Text>
+        <View style={handlerStyles(password)}>
+          <TouchableOpacity
+            onPress={handlerCopyString}
+          >
+            <Text style={styles.textGenerator}>{password}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -82,6 +116,16 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
   },
+  textGeneratorOpacity: {
+    height: 50,
+    width: '100%',
+    marginTop: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fafafa',
+    elevation: 5,
+    opacity: 0
+  },
   textGeneratorView: {
     height: 50,
     width: '100%',
@@ -89,10 +133,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fafafa',
-    elevation: 5
+    elevation: 5,
   },
   textGenerator: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  textCaracter: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 15
   }
 });
