@@ -1,5 +1,5 @@
 
-<h1 align="center">📱 TicTacToe - Mobile</h1>
+<h1 align="center">📱 Generator Password - Mobile</h1>
 <h4 align="center" style="margin-bottom:30px"> 
 	🚧  Projeto 🚀 Em construção...  🚧
 </h4>
@@ -16,9 +16,15 @@
   O projeto desenvolvido foi inspirado em um video do youtube no canal:
   Sujeito programdor.</p>
   <div style="display:flex; flex-direction:column" >
-  <a href="https://www.youtube.com/channel/UCLc5Bq2yfs-S3Zse3ZFRMEQ">Sujeito Programador</a>
-  <a href="https://www.youtube.com/watch?v=ZSV4fsaVTIs&list=LL&index=6&t=3658s&ab_channel=Sujeitoprogramador">React Native Insider - Aula 01 Iniciando sua jornada!</a>
+    <p>Acesse os links abaixo:</p>
+    <p align="start">
+      <a href="https://www.youtube.com/channel/UCLc5Bq2yfs-S3Zse3ZFRMEQ">Sujeito Programador</a>
+    </p>
+    <p align="start">
+      <a href="https://www.youtube.com/watch?v=ZSV4fsaVTIs&list=LL&index=6&t=3658s&ab_channel=Sujeitoprogramador">React Native Insider - Aula 01 Iniciando sua jornada!</a>
+    </p>
   </div>
+  
 </div>
 
 <div id="tecnologias" style="margin-top:60px">
